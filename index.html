@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
@@ -12,649 +13,652 @@
                  url('./GenJyuuGothicL-P-Normal.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
-            font-display: optional; /* 更積極的載入策略 */
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            font-display: optional;
         }
 
-        body {
-            font-family: 'GenJyuuGothic', 'Microsoft JhengHei', '微軟正黑體', 'Noto Sans CJK TC', sans-serif;
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-            color: var(--text-gray);
-            overflow-x: hidden;
-            font-size: var(--body-size);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+```
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        .presentation-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
-            max-width: 1200px;
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-            min-height: auto;
-        }
+    body {
+        font-family: 'GenJyuuGothic', 'Microsoft JhengHei', '微軟正黑體', 'Noto Sans CJK TC', sans-serif;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        color: #495057;
+        overflow-x: hidden;
+        font-size: 16px;
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
 
+    .presentation-container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        max-width: 1200px;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        min-height: auto;
+    }
+
+    .slide {
+        display: none;
+        padding: 40px 60px;
+        min-height: 600px;
+        position: relative;
+        background: white;
+    }
+
+    .slide.active {
+        display: block;
+    }
+
+    .slide:not(.title-slide) {
+        padding-top: 30px;
+        padding-bottom: 80px;
+    }
+
+    .slide h1 {
+        font-size: 3rem;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 40px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .slide h2 {
+        font-size: 2.5rem;
+        color: #343a40;
+        margin-bottom: 30px;
+        border-bottom: 3px solid #c71e44;
+        padding-bottom: 10px;
+        position: relative;
+    }
+    
+    .slide h2::after {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background: #c71e44;
+    }
+
+    /* 不同主題的配色方案 */
+    .slide.theme-preparation h2 {
+        border-bottom-color: #28a745;
+        color: #28a745;
+    }
+    
+    .slide.theme-preparation h2::after {
+        background: #28a745;
+    }
+
+    .slide.theme-inspection h2 {
+        border-bottom-color: #fd7e14;
+        color: #fd7e14;
+    }
+    
+    .slide.theme-inspection h2::after {
+        background: #fd7e14;
+    }
+
+    .slide.theme-operation h2 {
+        border-bottom-color: #20c997;
+        color: #20c997;
+    }
+    
+    .slide.theme-operation h2::after {
+        background: #20c997;
+    }
+
+    .slide.theme-emergency h2 {
+        border-bottom-color: #dc3545;
+        color: #dc3545;
+    }
+    
+    .slide.theme-emergency h2::after {
+        background: #dc3545;
+    }
+
+    .slide h3 {
+        font-size: 2rem;
+        color: #495057;
+        margin: 25px 0 20px 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .slide h3::before {
+        content: "🔧";
+        margin-right: 10px;
+        color: #c71e44;
+    }
+
+    .slide p, .slide li {
+        font-size: 1.3rem;
+        line-height: 1.8;
+        color: #495057;
+        margin-bottom: 15px;
+    }
+
+    .slide ul {
+        margin-left: 30px;
+    }
+
+    .slide li {
+        margin-bottom: 12px;
+        position: relative;
+        padding-left: 10px;
+    }
+
+    .slide li::marker {
+        content: "▶ ";
+        color: #c71e44;
+        font-weight: bold;
+    }
+
+    .warning-box {
+        background: white;
+        border: 2px solid #c71e44;
+        border-left: 6px solid #c71e44;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        color: #495057;
+        font-weight: bold;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 12px rgba(199, 30, 68, 0.1);
+    }
+
+    .warning-box.green {
+        border-color: #28a745;
+        border-left-color: #28a745;
+        box-shadow: 0 4px 12px rgba(40, 167, 69, 0.1);
+    }
+
+    .warning-box.orange {
+        border-color: #fd7e14;
+        border-left-color: #fd7e14;
+        box-shadow: 0 4px 12px rgba(253, 126, 20, 0.1);
+    }
+
+    .warning-box.danger {
+        border-color: #dc3545;
+        border-left-color: #dc3545;
+        box-shadow: 0 4px 12px rgba(220, 53, 69, 0.1);
+    }
+    
+    .warning-box h4 {
+        color: #c71e44;
+        margin-bottom: 10px;
+        font-size: 1.4rem;
+    }
+
+    .warning-box.green h4 {
+        color: #28a745;
+    }
+
+    .warning-box.orange h4 {
+        color: #fd7e14;
+    }
+
+    .warning-box.danger h4 {
+        color: #dc3545;
+    }
+
+    .info-box {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-left: 4px solid #c71e44;
+        padding: 15px 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        color: #495057;
+        font-weight: bold;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .info-box.green {
+        border-left-color: #28a745;
+        background: #f8fff9;
+    }
+
+    .info-box.orange {
+        border-left-color: #fd7e14;
+        background: #fff8f0;
+    }
+
+    .info-box.teal {
+        border-left-color: #20c997;
+        background: #f0fffe;
+    }
+
+    .info-box.danger {
+        border-left-color: #dc3545;
+        background: #fff5f5;
+    }
+    
+    .info-box h4 {
+        color: #c71e44;
+        margin-bottom: 10px;
+        font-size: 1.4rem;
+    }
+
+    .info-box.green h4 {
+        color: #28a745;
+    }
+
+    .info-box.orange h4 {
+        color: #fd7e14;
+    }
+
+    .info-box.teal h4 {
+        color: #20c997;
+    }
+
+    .info-box.danger h4 {
+        color: #dc3545;
+    }
+    
+    .info-box p {
+        margin-bottom: 0;
+        font-size: 1.2rem;
+        color: #495057;
+        font-weight: normal;
+    }
+
+    .logo {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 80px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    
+    .logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .navigation {
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+        display: flex;
+        gap: 15px;
+    }
+
+    .nav-btn {
+        padding: 12px 25px;
+        background: white;
+        color: #c71e44;
+        border: 2px solid #c71e44;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(199, 30, 68, 0.1);
+    }
+
+    .nav-btn:hover {
+        background: #c71e44;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(199, 30, 68, 0.2);
+    }
+
+    .nav-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .slide-counter {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 4px 10px;
+        border-radius: 15px;
+        font-size: 0.9rem;
+    }
+
+    .title-slide {
+        background: white;
+        color: #2c3e50;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 3px solid #c71e44;
+        position: relative;
+    }
+
+    .title-slide::before {
+        content: "";
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        border: 2px solid #c71e44;
+        border-radius: 15px;
+        opacity: 0.3;
+    }
+
+    .equipment-type {
+        font-size: 1.5rem;
+        color: #495057;
+        margin-bottom: 20px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        background: linear-gradient(135deg, #c71e44, #e91e63);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .title-slide h1 {
+        font-size: 4rem;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        color: #2c3e50;
+        background: linear-gradient(135deg, #c71e44, #e91e63);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .title-slide .subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 40px;
+        color: #495057;
+        font-weight: 500;
+    }
+
+    .company-logo {
+        width: 160px;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 30px auto;
+        overflow: hidden;
+    }
+    
+    .company-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .highlight {
+        background: #fff3f4;
+        padding: 3px 8px;
+        border-radius: 4px;
+        color: #c71e44;
+        font-weight: bold;
+        border: 1px solid #ffc1cc;
+    }
+
+    .critical-point {
+        background: linear-gradient(135deg, #c71e44, #e91e63);
+        color: white;
+        padding: 25px;
+        border-radius: 10px;
+        margin: 25px 0;
+        font-weight: bold;
+        text-align: center;
+        font-size: 1.8rem;
+        box-shadow: 0 6px 20px rgba(199, 30, 68, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .critical-point.green {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        box-shadow: 0 6px 20px rgba(40, 167, 69, 0.2);
+    }
+
+    .critical-point.orange {
+        background: linear-gradient(135deg, #fd7e14, #ffc107);
+        box-shadow: 0 6px 20px rgba(253, 126, 20, 0.2);
+    }
+
+    .critical-point.teal {
+        background: linear-gradient(135deg, #20c997, #17a2b8);
+        box-shadow: 0 6px 20px rgba(32, 201, 151, 0.2);
+    }
+
+    .critical-point.danger {
+        background: linear-gradient(135deg, #dc3545, #c82333);
+        box-shadow: 0 6px 20px rgba(220, 53, 69, 0.2);
+    }
+    
+    .critical-point::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+        animation: shine 3s infinite;
+    }
+    
+    @keyframes shine {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    .progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #c71e44, #e91e63);
+        transition: width 0.3s ease;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(199, 30, 68, 0.2);
+    }
+
+    .translation-controls {
+        position: fixed;
+        left: 20px;
+        bottom: 80px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 12px 8px;
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(5px);
+    }
+    
+    .lang-btn {
+        padding: 6px 12px;
+        background: white;
+        color: #495057;
+        border: 2px solid #dee2e6;
+        border-radius: 15px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .lang-btn.active {
+        background: #c71e44;
+        color: white;
+        border-color: #c71e44;
+    }
+
+    .lang-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .pdf-btn {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        width: 45px;
+        height: 45px;
+        background: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+        transition: all 0.3s ease;
+        z-index: 1001;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pdf-btn:hover {
+        background: #c82333;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+    }
+
+    .pdf-btn:active {
+        transform: translateY(0);
+    }
+    
+    .translation {
+        display: none;
+        color: #6c757d;
+        font-style: italic;
+    }
+
+    .translation.active {
+        display: inline;
+    }
+
+    .translation-block {
+        display: none;
+        color: #6c757d;
+        font-style: italic;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .translation-block.active {
+        display: block;
+    }
+
+    .critical-point .translation-block {
+        color: white;
+    }
+
+    .title-slide .translation-block {
+        font-size: 1.2rem;
+    }
+
+    .text-with-translation {
+        position: relative;
+    }
+
+    @media (max-width: 768px) {
         .slide {
-            display: none;
-            padding: 40px 60px;
-            min-height: 600px;
-            position: relative;
-            background: white;
-        }
-
-        .slide.active {
-            display: block;
-        }
-
-        .slide:not(.title-slide) {
-            padding-top: 30px;
-            padding-bottom: 80px;
-        }
-
-        .slide h1 {
-            font-size: 3rem;
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 40px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .slide h2 {
-            font-size: 2.5rem;
-            color: #343a40;
-            margin-bottom: 30px;
-            border-bottom: 3px solid #c71e44;
-            padding-bottom: 10px;
-            position: relative;
-        }
-        
-        .slide h2::after {
-            content: "";
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: #c71e44;
-        }
-
-        /* 不同主題的配色方案 */
-        .slide.theme-preparation h2 {
-            border-bottom-color: #28a745;
-            color: #28a745;
-        }
-        
-        .slide.theme-preparation h2::after {
-            background: #28a745;
-        }
-
-        .slide.theme-inspection h2 {
-            border-bottom-color: #fd7e14;
-            color: #fd7e14;
-        }
-        
-        .slide.theme-inspection h2::after {
-            background: #fd7e14;
-        }
-
-        .slide.theme-operation h2 {
-            border-bottom-color: #20c997;
-            color: #20c997;
-        }
-        
-        .slide.theme-operation h2::after {
-            background: #20c997;
-        }
-
-        .slide.theme-emergency h2 {
-            border-bottom-color: #dc3545;
-            color: #dc3545;
-        }
-        
-        .slide.theme-emergency h2::after {
-            background: #dc3545;
-        }
-
-        .slide h3 {
-            font-size: 2rem;
-            color: #495057;
-            margin: 25px 0 20px 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .slide h3::before {
-            content: "🔧";
-            margin-right: 10px;
-            color: #c71e44;
-        }
-
-        .slide p, .slide li {
-            font-size: 1.3rem;
-            line-height: 1.8;
-            color: #495057;
-            margin-bottom: 15px;
-        }
-
-        .slide ul {
-            margin-left: 30px;
-        }
-
-        .slide li {
-            margin-bottom: 12px;
-            position: relative;
-            padding-left: 10px;
-        }
-
-        .slide li::marker {
-            content: "▶ ";
-            color: #c71e44;
-            font-weight: bold;
-        }
-
-        .warning-box {
-            background: white;
-            border: 2px solid #c71e44;
-            border-left: 6px solid #c71e44;
             padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            color: #495057;
-            font-weight: bold;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 12px rgba(199, 30, 68, 0.1);
-        }
-
-        .warning-box.green {
-            border-color: #28a745;
-            border-left-color: #28a745;
-            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.1);
-        }
-
-        .warning-box.orange {
-            border-color: #fd7e14;
-            border-left-color: #fd7e14;
-            box-shadow: 0 4px 12px rgba(253, 126, 20, 0.1);
-        }
-
-        .warning-box.danger {
-            border-color: #dc3545;
-            border-left-color: #dc3545;
-            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.1);
         }
         
-        .warning-box h4 {
-            color: #c71e44;
-            margin-bottom: 10px;
+        .slide h1 {
+            font-size: 2.2rem;
+        }
+        
+        .slide h2 {
+            font-size: 1.8rem;
+        }
+        
+        .slide h3 {
             font-size: 1.4rem;
         }
-
-        .warning-box.green h4 {
-            color: #28a745;
-        }
-
-        .warning-box.orange h4 {
-            color: #fd7e14;
-        }
-
-        .warning-box.danger h4 {
-            color: #dc3545;
-        }
-
-        .info-box {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-left: 4px solid #c71e44;
-            padding: 15px 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            color: #495057;
-            font-weight: bold;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        .info-box.green {
-            border-left-color: #28a745;
-            background: #f8fff9;
-        }
-
-        .info-box.orange {
-            border-left-color: #fd7e14;
-            background: #fff8f0;
-        }
-
-        .info-box.teal {
-            border-left-color: #20c997;
-            background: #f0fffe;
-        }
-
-        .info-box.danger {
-            border-left-color: #dc3545;
-            background: #fff5f5;
+        
+        .slide p, .slide li {
+            font-size: 1.1rem;
         }
         
-        .info-box h4 {
-            color: #c71e44;
-            margin-bottom: 10px;
-            font-size: 1.4rem;
-        }
-
-        .info-box.green h4 {
-            color: #28a745;
-        }
-
-        .info-box.orange h4 {
-            color: #fd7e14;
-        }
-
-        .info-box.teal h4 {
-            color: #20c997;
-        }
-
-        .info-box.danger h4 {
-            color: #dc3545;
-        }
-        
-        .info-box p {
-            margin-bottom: 0;
-            font-size: 1.2rem;
-            color: #495057;
-            font-weight: normal;
-        }
-
-        .logo {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 80px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        
-        .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
         .navigation {
-            position: absolute;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            gap: 15px;
+            bottom: 15px;
+            right: 15px;
+            gap: 10px;
         }
-
+        
         .nav-btn {
-            padding: 12px 25px;
-            background: white;
-            color: #c71e44;
-            border: 2px solid #c71e44;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(199, 30, 68, 0.1);
-        }
-
-        .nav-btn:hover {
-            background: #c71e44;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(199, 30, 68, 0.2);
-        }
-
-        .nav-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .slide-counter {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 15px;
+            padding: 10px 20px;
             font-size: 0.9rem;
         }
-
-        .title-slide {
-            background: white;
-            color: #2c3e50;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border: 3px solid #c71e44;
-            position: relative;
-        }
-
-        .title-slide::before {
-            content: "";
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            bottom: 20px;
-            border: 2px solid #c71e44;
-            border-radius: 15px;
-            opacity: 0.3;
-        }
-
-        .equipment-type {
-            font-size: 1.5rem;
-            color: #495057;
-            margin-bottom: 20px;
-            font-weight: 500;
-            letter-spacing: 2px;
-            background: linear-gradient(135deg, #c71e44, #e91e63);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .title-slide h1 {
-            font-size: 4rem;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            color: #2c3e50;
-            background: linear-gradient(135deg, #c71e44, #e91e63);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .title-slide .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            color: #495057;
-            font-weight: 500;
-        }
-
-        .company-logo {
-            width: 160px;
-            height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 30px auto;
-            overflow: hidden;
-        }
         
-        .company-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .highlight {
-            background: #fff3f4;
-            padding: 3px 8px;
-            border-radius: 4px;
-            color: #c71e44;
-            font-weight: bold;
-            border: 1px solid #ffc1cc;
-        }
-
-        .critical-point {
-            background: linear-gradient(135deg, #c71e44, #e91e63);
-            color: white;
-            padding: 25px;
-            border-radius: 10px;
-            margin: 25px 0;
-            font-weight: bold;
-            text-align: center;
-            font-size: 1.8rem;
-            box-shadow: 0 6px 20px rgba(199, 30, 68, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .critical-point.green {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.2);
-        }
-
-        .critical-point.orange {
-            background: linear-gradient(135deg, #fd7e14, #ffc107);
-            box-shadow: 0 6px 20px rgba(253, 126, 20, 0.2);
-        }
-
-        .critical-point.teal {
-            background: linear-gradient(135deg, #20c997, #17a2b8);
-            box-shadow: 0 6px 20px rgba(32, 201, 151, 0.2);
-        }
-
-        .critical-point.danger {
-            background: linear-gradient(135deg, #dc3545, #c82333);
-            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.2);
-        }
-        
-        .critical-point::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            animation: shine 3s infinite;
-        }
-        
-        @keyframes shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #c71e44, #e91e63);
-            transition: width 0.3s ease;
-            z-index: 1000;
-            box-shadow: 0 2px 4px rgba(199, 30, 68, 0.2);
-        }
-
         .translation-controls {
-            position: fixed;
-            left: 20px;
-            bottom: 80px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 12px 8px;
-            border-radius: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            backdrop-filter: blur(5px);
+            left: 10px;
+            bottom: 70px;
+            padding: 10px 6px;
         }
         
         .lang-btn {
-            padding: 6px 12px;
-            background: white;
-            color: #495057;
-            border: 2px solid #dee2e6;
-            border-radius: 15px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .lang-btn.active {
-            background: #c71e44;
-            color: white;
-            border-color: #c71e44;
-        }
-
-        .lang-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .pdf-btn {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 45px;
-            height: 45px;
-            background: #dc3545;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
-            transition: all 0.3s ease;
-            z-index: 1001;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .pdf-btn:hover {
-            background: #c82333;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
-        }
-
-        .pdf-btn:active {
-            transform: translateY(0);
+            padding: 6px 10px;
+            font-size: 0.7rem;
+            min-width: 55px;
         }
         
-        .translation {
-            display: none;
-            color: #6c757d;
-            font-style: italic;
+        .pdf-btn {
+            bottom: 10px;
+            left: 10px;
+            width: 40px;
+            height: 40px;
+            font-size: 14px;
         }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            top: 10px;
+            right: 10px;
+        }
+        
+        .slide-counter {
+            bottom: 10px;
+            left: 10px;
+            padding: 4px 8px;
+            font-size: 0.8rem;
+        }
+        
+        .title-slide h1 {
+            font-size: 2.5rem;
+        }
+        
+        .critical-point {
+            font-size: 1.4rem;
+            padding: 20px;
+        }
+    }
+</style>
+```
 
-        .translation.active {
-            display: inline;
-        }
-
-        .translation-block {
-            display: none;
-            color: #6c757d;
-            font-style: italic;
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .translation-block.active {
-            display: block;
-        }
-
-        .critical-point .translation-block {
-            color: white;
-        }
-
-        .title-slide .translation-block {
-            font-size: 1.2rem;
-        }
-
-        .text-with-translation {
-            position: relative;
-        }
-
-        @media (max-width: 768px) {
-            .slide {
-                padding: 20px;
-            }
-            
-            .slide h1 {
-                font-size: 2.2rem;
-            }
-            
-            .slide h2 {
-                font-size: 1.8rem;
-            }
-            
-            .slide h3 {
-                font-size: 1.4rem;
-            }
-            
-            .slide p, .slide li {
-                font-size: 1.1rem;
-            }
-            
-            .navigation {
-                bottom: 15px;
-                right: 15px;
-                gap: 10px;
-            }
-            
-            .nav-btn {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-            }
-            
-            .translation-controls {
-                left: 10px;
-                bottom: 70px;
-                padding: 10px 6px;
-            }
-            
-            .lang-btn {
-                padding: 6px 10px;
-                font-size: 0.7rem;
-                min-width: 55px;
-            }
-            
-            .pdf-btn {
-                bottom: 10px;
-                left: 85px;
-                width: 40px;
-                height: 40px;
-                font-size: 14px;
-            }
-            
-            .logo {
-                width: 60px;
-                height: 60px;
-                top: 10px;
-                right: 10px;
-            }
-            
-            .slide-counter {
-                bottom: 10px;
-                left: 10px;
-                padding: 4px 8px;
-                font-size: 0.8rem;
-            }
-            
-            .title-slide h1 {
-                font-size: 2.5rem;
-            }
-            
-            .critical-point {
-                font-size: 1.4rem;
-                padding: 20px;
-            }
-        }
-    </style>
 </head>
 <body>
     <div class="translation-controls">
@@ -664,388 +668,466 @@
         <button class="lang-btn" onclick="switchLanguage('vi')" id="vi-btn">🇻🇳</button>
     </div>
 
-    <div class="progress-bar" id="progressBar"></div>
-    
-    <button class="pdf-btn" onclick="generatePDF()" title="匯出 PDF">📄</button>
-    
-    <div class="presentation-container">
-        <!-- 封面投影片 -->
-        <div class="slide active title-slide">
-            <div class="company-logo">
-                <img src="https://github.com/Williyen/safelift/blob/main/%E5%A4%A7%E5%90%8Clogo_1.png?raw=true" alt="大同鋁業 TTA Logo">
-            </div>
-            <div class="equipment-type">固定式起重機 <span class="translation" data-id="id">/ Crane Tetap</span> <span class="translation" data-th="th">/ เครนแบบคงที่</span> <span class="translation" data-vi="vi">/ Cần cẩu cố định</span></div>
-            <h1 class="text-with-translation">吊掛作業安全說明
-                <div class="translation-block" data-id="id">Keamanan dalam pekerjaan pengangkatan</div>
-                <div class="translation-block" data-th="th">คำแนะนำความปลอดภัยสำหรับการยกของ</div>
-                <div class="translation-block" data-vi="vi">Hướng dẫn an toàn cho công việc nâng hạ</div>
-            </h1>
-            <div class="subtitle text-with-translation">為確保作業人員安全，需謹慎注意本說明事項
-                <div class="translation-block" data-id="id">Untuk menjamin keselamatan pekerja, harap perhatikan dengan cermat hal-hal berikut</div>
-                <div class="translation-block" data-th="th">เพื่อความปลอดภัยของพนักงาน โปรดใส่ใจกับข้อแนะนำต่อไปนี้</div>
-                <div class="translation-block" data-vi="vi">Để đảm bảo an toàn cho công nhân, vui lòng chú ý cẩn thận đến những hướng dẫn sau</div>
-            </div>
-            <div style="margin-top: 40px; font-size: 1.2rem; color: #495057; font-weight: 500;">2025/07</div>
-        </div>
+```
+<div class="progress-bar" id="progressBar"></div>
 
-        <!-- 投影片1: 作業前檢點 -->
-        <div class="slide theme-preparation">
-            <div class="slide-counter">2/5</div>
-            <div class="logo">
-                <img src="https://github.com/Williyen/safelift/blob/main/%E5%A4%A7%E5%90%8Clogo_1.png?raw=true" alt="TTA Logo">
-            </div>
-            <h2>一、作業前檢點 <span class="translation" data-id="id">/ Pemeriksaan sebelum melakukan pekerjaan</span> <span class="translation" data-th="th">/ การตรวจสอบก่อนปฏิบัติงาน</span> <span class="translation" data-vi="vi">/ Kiểm tra trước khi làm việc</span></h2>
-            
-            <div class="critical-point green">
-                🛡️ 準備階段是安全的第一道防線
-                <div class="translation-block" data-id="id">Tahap persiapan adalah garis pertahanan keamanan pertama</div>
-                <div class="translation-block" data-th="th">ขั้นตอนการเตรียมความพร้อมเป็นแนวป้องกันความปลอดภัยชั้นแรก</div>
-                <div class="translation-block" data-vi="vi">Giai đoạn chuẩn bị là tuyến phòng thủ an toàn đầu tiên</div>
-            </div>
-            
-            <h3>基本防護裝備 <span class="translation" data-id="id">/ Peralatan Pelindung Dasar</span> <span class="translation" data-th="th">/ อุปกรณ์ป้องกันพื้นฐาน</span> <span class="translation" data-vi="vi">/ Trang bị bảo vệ cơ bản</span></h3>
-            <ul>
-                <li>操作固定式起重機人員須配戴安全帽（扣好頤帶）穿著安全鞋 <span class="translation" data-id="id">/ Petugas pengoperasian crane tetap harus memakai helm keselamatan (dengan tali dagu terpasang) dan sepatu keselamatan</span> <span class="translation" data-th="th">/ ผู้ปฏิบัติงานเครนแบบติดตั้งถาวรต้องสวมหมวกนิรภัย (รัดสายรัดคางให้เรียบร้อย) และสวมรองเท้านิรภัย</span> <span class="translation" data-vi="vi">/ Nhân viên vận hành cần trục cố định phải đội mũ bảo hiểm (gài dây quai cằm) và mang giày bảo hộ</span></li>
-                <li>吊運車軌道直行及橫行之導軌狀況檢查 <span class="translation" data-id="id">/ Periksa kondisi rel lintasan lurus dan melintang dari troli pengangkut</span> <span class="translation" data-th="th">/ ตรวจสอบสภาพรางทางตรงและทางขวางของรถยก</span> <span class="translation" data-vi="vi">/ Kiểm tra tình trạng đường ray di chuyển thẳng và ngang của xe nâng</span></li>
-                <li>預估起吊物重量 <span class="translation" data-id="id">/ Perkirakan berat beban yang akan diangkat</span> <span class="translation" data-th="th">/ ประเมินน้ำหนักของสิ่งที่จะยก</span> <span class="translation" data-vi="vi">/ Ước tính trọng lượng của vật cần nâng</span></li>
+<button class="pdf-btn" onclick="generatePDF()" title="匯出 PDF">📄</button>
+
+<div class="presentation-container">
+    <!-- 封面投影片 -->
+    <div class="slide active title-slide">
+        <div class="company-logo">
+            <img src="https://github.com/Williyen/safelift/blob/main/%E5%A4%A7%E5%90%8Clogo_1.png?raw=true" alt="大同鋁業 TTA Logo">
+        </div>
+        <div class="equipment-type">固定式起重機 <span class="translation" data-id="id">/ Crane Tetap</span> <span class="translation" data-th="th">/ เครนแบบคงที่</span> <span class="translation" data-vi="vi">/ Cần cẩu cố định</span></div>
+        <h1 class="text-with-translation">吊掛作業安全說明
+            <div class="translation-block" data-id="id">Keamanan dalam pekerjaan pengangkatan</div>
+            <div class="translation-block" data-th="th">คำแนะนำความปลอดภัยสำหรับการยกของ</div>
+            <div class="translation-block" data-vi="vi">Hướng dẫn an toàn cho công việc nâng hạ</div>
+        </h1>
+        <div class="subtitle text-with-translation">為確保作業人員安全，需謹慎注意本說明事項
+            <div class="translation-block" data-id="id">Untuk menjamin keselamatan pekerja, harap perhatikan dengan cermat hal-hal berikut</div>
+            <div class="translation-block" data-th="th">เพื่อความปลอดภัยของพนักงาน โปรดใส่ใจกับข้อแนะนำต่อไปนี้</div>
+            <div class="translation-block" data-vi="vi">Để đảm bảo an toàn cho công nhân, vui lòng chú ý cẩn thận đến những hướng dẫn sau</div>
+        </div>
+        <div style="margin-top: 40px; font-size: 1.2rem; color: #495057; font-weight: 500;">2025/07</div>
+    </div>
+
+    <!-- 投影片1: 作業前檢點 -->
+    <div class="slide theme-preparation">
+        <div class="slide-counter">2/5</div>
+        <div class="logo">
+            <img src="https://github.com/Williyen/safelift/blob/main/%E5%A4%A7%E5%90%8Clogo_1.png?raw=true" alt="TTA Logo">
+        </div>
+        <h2>一、作業前檢點 <span class="translation" data-id="id">/ Pemeriksaan sebelum melakukan pekerjaan</span> <span class="translation" data-th="th">/ การตรวจสอบก่อนปฏิบัติงาน</span> <span class="translation" data-vi="vi">/ Kiểm tra trước khi làm việc</span></h2>
+        
+        <div class="critical-point green">
+            🛡️ 準備階段是安全的第一道防線
+            <div class="translation-block" data-id="id">Tahap persiapan adalah garis pertahanan keamanan pertama</div>
+            <div class="translation-block" data-th="th">ขั้นตอนการเตรียมความพร้อมเป็นแนวป้องกันความปลอดภัยชั้นแรก</div>
+            <div class="translation-block" data-vi="vi">Giai đoạn chuẩn bị là tuyến phòng thủ an toàn đầu tiên</div>
+        </div>
+        
+        <h3>基本防護裝備 <span class="translation" data-id="id">/ Peralatan Pelindung Dasar</span> <span class="translation" data-th="th">/ อุปกรณ์ป้องกันพื้นฐาน</span> <span class="translation" data-vi="vi">/ Trang bị bảo vệ cơ bản</span></h3>
+        <ul>
+            <li>操作固定式起重機人員須配戴安全帽（扣好頤帶）穿著安全鞋 <span class="translation" data-id="id">/ Petugas pengoperasian crane tetap harus memakai helm keselamatan (dengan tali dagu terpasang) dan sepatu keselamatan</span> <span class="translation" data-th="th">/ ผู้ปฏิบัติงานเครนแบบติดตั้งถาวรต้องสวมหมวกนิรภัย (รัดสายรัดคางให้เรียบร้อย) และสวมรองเท้านิรภัย</span> <span class="translation" data-vi="vi">/ Nhân viên vận hành cần trục cố định phải đội mũ bảo hiểm (gài dây quai cằm) và mang giày bảo hộ</span></li>
+            <li>吊運車軌道直行及橫行之導軌狀況檢查 <span class="translation" data-id="id">/ Periksa kondisi rel lintasan lurus dan melintang dari troli pengangkut</span> <span class="translation" data-th="th">/ ตรวจสอบสภาพรางทางตรงและทางขวางของรถยก</span> <span class="translation" data-vi="vi">/ Kiểm tra tình trạng đường ray di chuyển thẳng và ngang của xe nâng</span></li>
+            <li>預估起吊物重量 <span class="translation" data-id="id">/ Perkirakan berat beban yang akan diangkat</span> <span class="translation" data-th="th">/ ประเมินน้ำหนักของสิ่งที่จะยก</span> <span class="translation" data-vi="vi">/ Ước tính trọng lượng của vật cần nâng</span></li>
+        </ul>
+
+        <div class="warning-box green">
+            <h4>🔍 鋼索檢查標準 <span class="translation" data-id="id">/ Standar Pemeriksaan Kabel Baja</span> <span class="translation" data-th="th">/ มาตรฐานการตรวจสอบลวดสลิง</span> <span class="translation" data-vi="vi">/ Tiêu chuẩn kiểm tra cáp thép</span></h4>
+            <p>有下列情形之一，不得供起重吊掛作業使用：<span class="translation" data-id="id">/ Jika kabel baja memiliki salah satu kondisi berikut, maka tidak boleh digunakan untuk pengangkatan</span><span class="translation" data-th="th">/ หากลวดสลิงมีลักษณะดังต่อไปนี้ห้ามใช้ในการยกของ</span><span class="translation" data-vi="vi">/ Nếu cáp thép có một trong các tình trạng sau thì không được sử dụng để nâng hạ</span></p>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>鋼索一撚間有百分之十以上素線截斷者 <span class="translation" data-id="id">/ Lebih dari 10% kawat dalam satu puntiran terputus</span> <span class="translation" data-th="th">/ ลวดในเกลียวเดียวกันขาดเกิน 10%</span> <span class="translation" data-vi="vi">/ Hơn 10% sợi thép trong một bó bị đứt</span></li>
+                <li>直徑減少達公稱直徑百分之七以上者 <span class="translation" data-id="id">/ Diameter berkurang lebih dari 7% dari diameter nominal</span> <span class="translation" data-th="th">/ เส้นผ่านศูนย์กลางลดลงเกิน 7% จากขนาดเดิม</span> <span class="translation" data-vi="vi">/ Đường kính giảm hơn 7% so với đường kính danh định</span></li>
+                <li>有顯著變形或腐蝕者 <span class="translation" data-id="id">/ Terdapat deformasi atau korosi yang mencolok</span> <span class="translation" data-th="th">/ มีการบิดเบี้ยวหรือเกิดสนิมอย่างเห็นได้ชัด</span> <span class="translation" data-vi="vi">/ Bị biến dạng rõ rệt hoặc bị ăn mòn</span></li>
+                <li>已扭結者 <span class="translation" data-id="id">/ Sudah terpuntir atau terikat simpul</span> <span class="translation" data-th="th">/ มีการบิดเป็นปม</span> <span class="translation" data-vi="vi">/ Bị xoắn hoặc thắt nút</span></li>
             </ul>
-
-            <div class="warning-box green">
-                <h4>🔍 鋼索檢查標準 <span class="translation" data-id="id">/ Standar Pemeriksaan Kabel Baja</span> <span class="translation" data-th="th">/ มาตรฐานการตรวจสอบลวดสลิง</span> <span class="translation" data-vi="vi">/ Tiêu chuẩn kiểm tra cáp thép</span></h4>
-                <p>有下列情形之一，不得供起重吊掛作業使用：<span class="translation" data-id="id">/ Jika kabel baja memiliki salah satu kondisi berikut, maka tidak boleh digunakan untuk pengangkatan</span><span class="translation" data-th="th">/ หากลวดสลิงมีลักษณะดังต่อไปนี้ห้ามใช้ในการยกของ</span><span class="translation" data-vi="vi">/ Nếu cáp thép có một trong các tình trạng sau thì không được sử dụng để nâng hạ</span></p>
-                <ul style="margin-left: 20px; margin-top: 10px;">
-                    <li>鋼索一撚間有百分之十以上素線截斷者 <span class="translation" data-id="id">/ Lebih dari 10% kawat dalam satu puntiran terputus</span> <span class="translation" data-th="th">/ ลวดในเกลียวเดียวกันขาดเกิน 10%</span> <span class="translation" data-vi="vi">/ Hơn 10% sợi thép trong một bó bị đứt</span></li>
-                    <li>直徑減少達公稱直徑百分之七以上者 <span class="translation" data-id="id">/ Diameter berkurang lebih dari 7% dari diameter nominal</span> <span class="translation" data-th="th">/ เส้นผ่านศูนย์กลางลดลงเกิน 7% จากขนาดเดิม</span> <span class="translation" data-vi="vi">/ Đường kính giảm hơn 7% so với đường kính danh định</span></li>
-                    <li>有顯著變形或腐蝕者 <span class="translation" data-id="id">/ Terdapat deformasi atau korosi yang mencolok</span> <span class="translation" data-th="th">/ มีการบิดเบี้ยวหรือเกิดสนิมอย่างเห็นได้ชัด</span> <span class="translation" data-vi="vi">/ Bị biến dạng rõ rệt hoặc bị ăn mòn</span></li>
-                    <li>已扭結者 <span class="translation" data-id="id">/ Sudah terpuntir atau terikat simpul</span> <span class="translation" data-th="th">/ มีการบิดเป็นปม</span> <span class="translation" data-vi="vi">/ Bị xoắn hoặc thắt nút</span></li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- 投影片2: 吊鉤檢查 -->
-        <div class="slide theme-inspection">
-            <div class="slide-counter">3/5</div>
-            <div class="logo">
-                <img src="https://github.com/Williyen/safelift/blob/main/%E5%A4%A7%E5%90%8Clogo_1.png?raw=true" alt="TTA Logo">
-            </div>
-            <h2>吊鉤等吊具檢查 <span class="translation" data-id="id">/ Pemeriksaan Kait dan Alat Angkat</span> <span class="translation" data-th="th">/ การตรวจสอบตะขอและอุปกรณ์ยก</span> <span class="translation" data-vi="vi">/ Kiểm tra móc cẩu và thiết bị nâng</span></h2>
-
-            <div class="critical-point orange">
-                🔗 吊鉤安全檢查至關重要
-                <div class="translation-block" data-id="id">Pemeriksaan keamanan kait sangat penting</div>
-                <div class="translation-block" data-th="th">การตรวจสอบความปลอดภัยของตะขอมีความสำคัญอย่างยิ่ง</div>
-                <div class="translation-block" data-vi="vi">Việc kiểm tra an toàn móc cẩu là cực kỳ quan trọng</div>
-            </div>
-
-            <div class="warning-box orange">
-                <h4>⚠️ 吊鉤禁用標準 <span class="translation" data-id="id">/ Standar Larangan Penggunaan Kait</span> <span class="translation" data-th="th">/ มาตรฐานการห้ามใช้ตะขอ</span> <span class="translation" data-vi="vi">/ Tiêu chuẩn cấm sử dụng móc</span></h4>
-                <p>有下列情形之一，不得供起重吊掛作業使用：<span class="translation" data-id="id">/ Jika kait memiliki kondisi berikut, tidak boleh digunakan untuk pengangkatan</span><span class="translation" data-th="th">/ หากตะขอมีลักษณะดังต่อไปนี้ ห้ามใช้ในการยกของ</span><span class="translation" data-vi="vi">/ Nếu móc có một trong các tình trạng sau, không được sử dụng để nâng hạ</span></p>
-                <ul style="margin-left: 20px; margin-top: 10px;">
-                    <li>裂痕、磨耗（超過原尺寸<span class="highlight">5%</span>）、變形 <span class="translation" data-id="id">/ Retak, aus (lebih dari 5% ukuran asli), atau berubah bentuk</span> <span class="translation" data-th="th">/ มีรอยแตก สึกหรอ (เกิน 5% ของขนาดเดิม) หรือเปลี่ยนรูปร่าง</span> <span class="translation" data-vi="vi">/ Có vết nứt, mài mòn (vượt quá 5% kích thước gốc), hoặc bị biến dạng</span></li>
-                    <li>吊鉤開口寬度大於原製造尺寸<span class="highlight">5%</span>者 <span class="translation" data-id="id">/ Lebar bukaan kait lebih besar dari 5% ukuran pabrikan</span> <span class="translation" data-th="th">/ ช่องเปิดตะขอกว้างเกิน 5% ของขนาดที่ผู้ผลิตกำหนด</span> <span class="translation" data-vi="vi">/ Độ mở miệng móc lớn hơn 5% so với kích thước gốc của nhà sản xuất</span></li>
-                    <li>經補焊 <span class="translation" data-id="id">/ Pernah dilas ulang atau diperbaiki dengan pengelasan</span> <span class="translation" data-th="th">/ เคยผ่านการเชื่อมซ่อมแซม</span> <span class="translation" data-vi="vi">/ Đã được hàn lại để sửa chữa</span></li>
-                </ul>
-            </div>
-
-            <div class="info-box orange">
-                <h4>🔍 其他檢查項目 <span class="translation" data-id="id">/ Item Pemeriksaan Lainnya</span> <span class="translation" data-th="th">/ รายการตรวจสอบอื่นๆ</span> <span class="translation" data-vi="vi">/ Các mục kiểm tra khác</span></h4>
-                <ul style="margin-left: 20px; margin-top: 10px;">
-                    <li>電源開關及控制裝置有無異常 <span class="translation" data-id="id">/ Periksa apakah sakelar daya dan perangkat kontrol berfungsi normal atau tidak</span> <span class="translation" data-th="th">/ ตรวจสอบสวิตช์แหล่งจ่ายไฟและอุปกรณ์ควบคุมว่าทำงานปกติหรือไม่</span> <span class="translation" data-vi="vi">/ Kiểm tra xem công tắc nguồn và thiết bị điều khiển có bất thường hay không</span></li>
-                    <li>檢查警報裝置是否正常運作 <span class="translation" data-id="id">/ Periksa apakah perangkat alarm berfungsi dengan baik</span> <span class="translation" data-th="th">/ ตรวจสอบอุปกรณ์เตือนภัยว่าทำงานปกติหรือไม่</span> <span class="translation" data-vi="vi">/ Kiểm tra thiết bị báo động có hoạt động bình thường không</span></li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- 投影片3: 作業中注意事項 -->
-        <div class="slide theme-operation">
-            <div class="slide-counter">4/5</div>
-            <div class="logo">
-                <img src="https://github.com/Williyen/safelift/blob/main/%E5%A4%A7%E5%90%8Clogo_1.png?raw=true" alt="TTA Logo">
-            </div>
-            <h2>二、作業中注意事項 <span class="translation" data-id="id">/ Hal-hal yang perlu diperhatikan saat melakukan pekerjaan</span> <span class="translation" data-th="th">/ ข้อควรระวังระหว่างปฏิบัติงาน</span> <span class="translation" data-vi="vi">/ Những lưu ý trong quá trình làm việc</span></h2>
-
-            <div class="critical-point teal">
-                ⚡ 安全第一，速度第二
-                <div class="translation-block" data-id="id">Keselamatan yang utama, kecepatan yang kedua</div>
-                <div class="translation-block" data-th="th">ความปลอดภัยเป็นอันดับหนึ่ง ความเร็วเป็นอันดับสอง</div>
-                <div class="translation-block" data-vi="vi">An toàn là số một, tốc độ là số hai</div>
-            </div>
-
-            <h3>安全操作五大要點 <span class="translation" data-id="id">/ Lima Poin Utama Operasi Aman</span> <span class="translation" data-th="th">/ จุดสำคัญห้าประการของการปฏิบัติงานอย่างปลอดภัย</span> <span class="translation" data-vi="vi">/ Năm điểm quan trọng trong vận hành an toàn</span></h3>
-            <ul>
-                <li><strong>吊掛路徑人員淨空確認</strong> <span class="translation" data-id="id">/ Pastikan jalur pengangkatan bebas dari orang</span> <span class="translation" data-th="th">/ ตรวจสอบให้แน่ใจว่าเส้นทางยกไม่มีคนอยู่ในบริเวณนั้น</span> <span class="translation" data-vi="vi">/ Xác nhận đường nâng không có người đứng trong khu vực</span></li>
-                <li><strong>起吊物重心及中心確認</strong> <span class="translation" data-id="id">/ Periksa titik berat dan pusat beban benda yang akan diangkat</span> <span class="translation" data-th="th">/ ตรวจสอบจุดศูนย์ถ่วงและตำแหน่งตรงกลางของวัตถุที่จะยก</span> <span class="translation" data-vi="vi">/ Kiểm tra trọng tâm và vị trí trung tâm của vật được nâng</span></li>
-                <li><strong>起吊物離地30-50公分平穩確認</strong> <span class="translation" data-id="id">/ Pastikan beban stabil saat terangkat 30–50 cm dari tanah</span> <span class="translation" data-th="th">/ ตรวจสอบให้แน่ใจว่าวัตถุที่ยกขึ้นจากพื้น 30–50 ซม. มีความมั่นคง</span> <span class="translation" data-vi="vi">/ Đảm bảo vật nâng lên khỏi mặt đất 30–50 cm một cách ổn định</span></li>
-                <li><strong>禁止橫拉上升</strong> <span class="translation" data-id="id">/ Dilarang menarik beban secara horizontal saat mengangkat</span> <span class="translation" data-th="th">/ ห้ามดึงวัตถุในแนวนอนขณะยกขึ้น</span> <span class="translation" data-vi="vi">/ Cấm kéo ngang khi đang nâng lên</span></li>
-                <li><strong>駕駛起重機莫貪快</strong> <span class="translation" data-id="id">/ Operator crane jangan terburu-buru saat mengoperasikan</span> <span class="translation" data-th="th">/ ผู้ควบคุมเครนต้องไม่รีบเร่งเกินไป</span> <span class="translation" data-vi="vi">/ Người điều khiển cần cẩu không được nóng vội</span></li>
-            </ul>
-
-            <div class="info-box teal">
-                <h4>💡 操作要領 <span class="translation" data-id="id">/ Poin Utama Operasi</span> <span class="translation" data-th="th">/ จุดสำคัญในการปฏิบัติงาน</span> <span class="translation" data-vi="vi">/ Điểm chính trong vận hành</span></h4>
-                <p>穩定、精準、安全是起重機操作的三大原則 <span class="translation" data-id="id">/ Stabil, presisi, dan aman adalah tiga prinsip utama operasi crane</span> <span class="translation" data-th="th">/ ความมั่นคง ความแม่นยำ และความปลอดภัย เป็นสามหลักการสำคัญในการปฏิบัติงานเครน</span> <span class="translation" data-vi="vi">/ Ổn định, chính xác và an toàn là ba nguyên tắc chính trong vận hành cần cẩu</span></p>
-            </div>
-        </div>
-
-        <!-- 投影片4: 異常處理 -->
-        <div class="slide theme-emergency">
-            <div class="slide-counter">5/5</div>
-            <div class="logo">
-                <img src="https://github.com/Williyen/safelift/blob/main/%E5%A4%A7%E5%90%8Clogo_1.png?raw=true" alt="TTA Logo">
-            </div>
-            <h2>三、異常處理 <span class="translation" data-id="id">/ Penanganan jika terjadi kondisi tidak normal</span> <span class="translation" data-th="th">/ การจัดการเมื่อเกิดเหตุผิดปกติ</span> <span class="translation" data-vi="vi">/ Xử lý khi có tình huống bất thường</span></h2>
-
-            <div class="critical-point danger">
-                🚨 緊急情況立即停止作業
-                <div class="translation-block" data-id="id">Situasi darurat segera hentikan operasi</div>
-                <div class="translation-block" data-th="th">สถานการณ์ฉุกเฉินให้หยุดการทำงานทันที</div>
-                <div class="translation-block" data-vi="vi">Tình huống khẩn cấp phải dừng công việc ngay lập tức</div>
-            </div>
-
-            <div class="warning-box danger">
-                <h4>🚨 緊急停止情況 <span class="translation" data-id="id">/ Situasi Penghentian Darurat</span> <span class="translation" data-th="th">/ สถานการณ์ที่ต้องหยุดฉุกเฉิน</span> <span class="translation" data-vi="vi">/ Tình huống phải dừng khẩn cấp</span></h4>
-                <p>發生以下情況時，請立即停止作業：<span class="translation" data-id="id">/ Jika terjadi situasi berikut, segera hentikan operasi</span><span class="translation" data-th="th">/ หากเกิดสถานการณ์ต่อไปนี้ ให้หยุดการทำงานทันที</span><span class="translation" data-vi="vi">/ Khi xảy ra các tình huống sau, hãy dừng công việc ngay lập tức</span></p>
-            </div>
-
-            <h3>緊急處理三原則 <span class="translation" data-id="id">/ Tiga Prinsip Utama Penanganan Darurat</span> <span class="translation" data-th="th">/ หลักการสำคัญสามประการในการจัดการเหตุฉุกเฉิน</span> <span class="translation" data-vi="vi">/ Ba nguyên tắc chính xử lý khẩn cấp</span></h3>
-            <ul>
-                <li><strong>發現吊掛物下方人員通過請立即停止</strong> <span class="translation" data-id="id">/ Jika ada orang lewat di bawah beban yang sedang diangkat, segera hentikan operasi</span> <span class="translation" data-th="th">/ หากพบว่ามีคนเดินผ่านใต้วัตถุที่กำลังยกอยู่ให้หยุดการทำงานทันที</span> <span class="translation" data-vi="vi">/ Nếu phát hiện có người đi qua dưới vật đang được nâng, phải dừng lại ngay lập tức</span>
-                    <div style="margin-left: 20px; color: #dc3545; font-weight: bold;">→ 人員安全優先 <span class="translation" data-id="id">/ Prioritas keselamatan personel</span> <span class="translation" data-th="th">/ ความปลอดภัยของบุคลากรเป็นอันดับแรก</span> <span class="translation" data-vi="vi">/ Ưu tiên an toàn con người</span></div>
-                </li>
-                <li><strong>吊掛物在吊掛過程中搖晃請立即停止</strong> <span class="translation" data-id="id">/ Jika beban bergoyang saat proses pengangkatan, segera hentikan operasi</span> <span class="translation" data-th="th">/ หากวัตถุที่กำลังยกเกิดการแกว่ง ให้หยุดการทำงานทันที</span> <span class="translation" data-vi="vi">/ Nếu vật nâng bị lắc trong quá trình nâng, phải dừng lại ngay</span>
-                    <div style="margin-left: 20px; color: #dc3545; font-weight: bold;">→ 防止物件墜落 <span class="translation" data-id="id">/ Mencegah objek jatuh</span> <span class="translation" data-th="th">/ ป้องกันการตกหล่นของวัตถุ</span> <span class="translation" data-vi="vi">/ Ngăn ngừa vật rơi</span></div>
-                </li>
-                <li><strong>吊掛機具故障立即報告現場主管</strong> <span class="translation" data-id="id">/ Jika alat pengangkat mengalami kerusakan, segera laporkan kepada supervisor di lokasi</span> <span class="translation" data-th="th">/ หากเครื่องมือยกเกิดปัญหา ให้รายงานหัวหน้างานทันที</span> <span class="translation" data-vi="vi">/ Nếu thiết bị nâng gặp sự cố, phải báo cáo ngay cho quản lý tại hiện trường</span>
-                    <div style="margin-left: 20px; color: #dc3545; font-weight: bold;">→ 專業處理問題 <span class="translation" data-id="id">/ Penanganan masalah secara profesional</span> <span class="translation" data-th="th">/ การจัดการปัญหาอย่างมืออาชีพ</span> <span class="translation" data-vi="vi">/ Xử lý vấn đề một cách chuyên nghiệp</span></div>
-                </li>
-            </ul>
-
-            <div class="info-box danger">
-                <h4>📞 記住：發現異常立即停止，第一時間通報主管 <span class="translation" data-id="id">/ Ingat: Jika menemukan kelainan segera hentikan, laporkan kepada supervisor sesegera mungkin</span> <span class="translation" data-th="th">/ จำไว้: หากพบความผิดปกติให้หยุดทันที รายงานหัวหน้างานในทันที</span> <span class="translation" data-vi="vi">/ Ghi nhớ: Phát hiện bất thường phải dừng ngay, báo cáo quản lý ngay lập tức</span></h4>
-            </div>
-        </div>
-
-        <div class="navigation">
-            <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">◀ 上一頁</button>
-            <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">下一頁 ▶</button>
         </div>
     </div>
 
-    <script>
-        // 語言切換功能
-        let currentLanguage = 'zh';
+    <!-- 投影片2: 吊鉤檢查 -->
+    <div class="slide theme-inspection">
+        <div class="slide-counter">3/5</div>
+        <div class="logo">
+            <img src="https://github.com/Williyen/safelift/blob/main/%E5%A4%A7%E5%90%8Clogo_1.png?raw=true" alt="TTA Logo">
+        </div>
+        <h2>吊鉤等吊具檢查 <span class="translation" data-id="id">/ Pemeriksaan Kait dan Alat Angkat</span> <span class="translation" data-th="th">/ การตรวจสอบตะขอและอุปกรณ์ยก</span> <span class="translation" data-vi="vi">/ Kiểm tra móc cẩu và thiết bị nâng</span></h2>
 
-        function switchLanguage(lang) {
-            currentLanguage = lang;
-            
-            // 更新按鈕狀態
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(lang + '-btn').classList.add('active');
-            
-            // 隱藏所有翻譯
-            document.querySelectorAll('.translation').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.translation-block').forEach(el => el.classList.remove('active'));
-            
-            // 顯示對應語言的翻譯
-            if (lang !== 'zh') {
-                document.querySelectorAll('.translation[data-' + lang + ']').forEach(el => el.classList.add('active'));
-                document.querySelectorAll('.translation-block[data-' + lang + ']').forEach(el => el.classList.add('active'));
-            }
+        <div class="critical-point orange">
+            🔗 吊鉤安全檢查至關重要
+            <div class="translation-block" data-id="id">Pemeriksaan keamanan kait sangat penting</div>
+            <div class="translation-block" data-th="th">การตรวจสอบความปลอดภัยของตะขอมีความสำคัญอย่างยิ่ง</div>
+            <div class="translation-block" data-vi="vi">Việc kiểm tra an toàn móc cẩu là cực kỳ quan trọng</div>
+        </div>
+
+        <div class="warning-box orange">
+            <h4>⚠️ 吊鉤禁用標準 <span class="translation" data-id="id">/ Standar Larangan Penggunaan Kait</span> <span class="translation" data-th="th">/ มาตรฐานการห้ามใช้ตะขอ</span> <span class="translation" data-vi="vi">/ Tiêu chuẩn cấm sử dụng móc</span></h4>
+            <p>有下列情形之一，不得供起重吊掛作業使用：<span class="translation" data-id="id">/ Jika kait memiliki kondisi berikut, tidak boleh digunakan untuk pengangkatan</span><span class="translation" data-th="th">/ หากตะขอมีลักษณะดังต่อไปนี้ ห้ามใช้ในการยกของ</span><span class="translation" data-vi="vi">/ Nếu móc có một trong các tình trạng sau, không được sử dụng để nâng hạ</span></p>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>裂痕、磨耗（超過原尺寸<span class="highlight">5%</span>）、變形 <span class="translation" data-id="id">/ Retak, aus (lebih dari 5% ukuran asli), atau berubah bentuk</span> <span class="translation" data-th="th">/ มีรอยแตก สึกหรอ (เกิน 5% ของขนาดเดิม) หรือเปลี่ยนรูปร่าง</span> <span class="translation" data-vi="vi">/ Có vết nứt, mài mòn (vượt quá 5% kích thước gốc), hoặc bị biến dạng</span></li>
+                <li>吊鉤開口寬度大於原製造尺寸<span class="highlight">5%</span>者 <span class="translation" data-id="id">/ Lebar bukaan kait lebih besar dari 5% ukuran pabrikan</span> <span class="translation" data-th="th">/ ช่องเปิดตะขอกว้างเกิน 5% ของขนาดที่ผู้ผลิตกำหนด</span> <span class="translation" data-vi="vi">/ Độ mở miệng móc lớn hơn 5% so với kích thước gốc của nhà sản xuất</span></li>
+                <li>經補焊 <span class="translation" data-id="id">/ Pernah dilas ulang atau diperbaiki dengan pengelasan</span> <span class="translation" data-th="th">/ เคยผ่านการเชื่อมซ่อมแซม</span> <span class="translation" data-vi="vi">/ Đã được hàn lại để sửa chữa</span></li>
+            </ul>
+        </div>
+
+        <div class="info-box orange">
+            <h4>🔍 其他檢查項目 <span class="translation" data-id="id">/ Item Pemeriksaan Lainnya</span> <span class="translation" data-th="th">/ รายการตรวจสอบอื่นๆ</span> <span class="translation" data-vi="vi">/ Các mục kiểm tra khác</span></h4>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>電源開關及控制裝置有無異常 <span class="translation" data-id="id">/ Periksa apakah sakelar daya dan perangkat kontrol berfungsi normal atau tidak</span> <span class="translation" data-th="th">/ ตรวจสอบสวิตช์แหล่งจ่ายไฟและอุปกรณ์ควบคุมว่าทำงานปกติหรือไม่</span> <span class="translation" data-vi="vi">/ Kiểm tra xem công tắc nguồn và thiết bị điều khiển có bất thường hay không</span></li>
+                <li>檢查警報裝置是否正常運作 <span class="translation" data-id="id">/ Periksa apakah perangkat alarm berfungsi dengan baik</span> <span class="translation" data-th="th">/ ตรวจสอบอุปกรณ์เตือนภัยว่าทำงานปกติหรือไม่</span> <span class="translation" data-vi="vi">/ Kiểm tra thiết bị báo động có hoạt động bình thường không</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 投影片3: 作業中注意事項 -->
+    <div class="slide theme-operation">
+        <div class="slide-counter">4/5</div>
+        <div class="logo">
+            <img src="https://github.com/Williyen/safelift/blob/main/%E5%A4%A7%E5%90%8Clogo_1.png?raw=true" alt="TTA Logo">
+        </div>
+        <h2>二、作業中注意事項 <span class="translation" data-id="id">/ Hal-hal yang perlu diperhatikan saat melakukan pekerjaan</span> <span class="translation" data-th="th">/ ข้อควรระวังระหว่างปฏิบัติงาน</span> <span class="translation" data-vi="vi">/ Những lưu ý trong quá trình làm việc</span></h2>
+
+        <div class="critical-point teal">
+            ⚡ 安全第一，速度第二
+            <div class="translation-block" data-id="id">Keselamatan yang utama, kecepatan yang kedua</div>
+            <div class="translation-block" data-th="th">ความปลอดภัยเป็นอันดับหนึ่ง ความเร็วเป็นอันดับสอง</div>
+            <div class="translation-block" data-vi="vi">An toàn là số một, tốc độ là số hai</div>
+        </div>
+
+        <h3>安全操作五大要點 <span class="translation" data-id="id">/ Lima Poin Utama Operasi Aman</span> <span class="translation" data-th="th">/ จุดสำคัญห้าประการของการปฏิบัติงานอย่างปลอดภัย</span> <span class="translation" data-vi="vi">/ Năm điểm quan trọng trong vận hành an toàn</span></h3>
+        <ul>
+            <li><strong>吊掛路徑人員淨空確認</strong> <span class="translation" data-id="id">/ Pastikan jalur pengangkatan bebas dari orang</span> <span class="translation" data-th="th">/ ตรวจสอบให้แน่ใจว่าเส้นทางยกไม่มีคนอยู่ในบริเวณนั้น</span> <span class="translation" data-vi="vi">/ Xác nhận đường nâng không có người đứng trong khu vực</span></li>
+            <li><strong>起吊物重心及中心確認</strong> <span class="translation" data-id="id">/ Periksa titik berat dan pusat beban benda yang akan diangkat</span> <span class="translation" data-th="th">/ ตรวจสอบจุดศูนย์ถ่วงและตำแหน่งตรงกลางของวัตถุที่จะยก</span> <span class="translation" data-vi="vi">/ Kiểm tra trọng tâm và vị trí trung tâm của vật được nâng</span></li>
+            <li><strong>起吊物離地30-50公分平穩確認</strong> <span class="translation" data-id="id">/ Pastikan beban stabil saat terangkat 30–50 cm dari tanah</span> <span class="translation" data-th="th">/ ตรวจสอบให้แน่ใจว่าวัตถุที่ยกขึ้นจากพื้น 30–50 ซม. มีความมั่นคง</span> <span class="translation" data-vi="vi">/ Đảm bảo vật nâng lên khỏi mặt đất 30–50 cm một cách ổn định</span></li>
+            <li><strong>禁止橫拉上升</strong> <span class="translation" data-id="id">/ Dilarang menarik beban secara horizontal saat mengangkat</span> <span class="translation" data-th="th">/ ห้ามดึงวัตถุในแนวนอนขณะยกขึ้น</span> <span class="translation" data-vi="vi">/ Cấm kéo ngang khi đang nâng lên</span></li>
+            <li><strong>駕駛起重機莫貪快</strong> <span class="translation" data-id="id">/ Operator crane jangan terburu-buru saat mengoperasikan</span> <span class="translation" data-th="th">/ ผู้ควบคุมเครนต้องไม่รีบเร่งเกินไป</span> <span class="translation" data-vi="vi">/ Người điều khiển cần cẩu không được nóng vội</span></li>
+        </ul>
+
+        <div class="info-box teal">
+            <h4>💡 操作要領 <span class="translation" data-id="id">/ Poin Utama Operasi</span> <span class="translation" data-th="th">/ จุดสำคัญในการปฏิบัติงาน</span> <span class="translation" data-vi="vi">/ Điểm chính trong vận hành</span></h4>
+            <p>穩定、精準、安全是起重機操作的三大原則 <span class="translation" data-id="id">/ Stabil, presisi, dan aman adalah tiga prinsip utama operasi crane</span> <span class="translation" data-th="th">/ ความมั่นคง ความแม่นยำ และความปลอดภัย เป็นสามหลักการสำคัญในการปฏิบัติงานเครน</span> <span class="translation" data-vi="vi">/ Ổn định, chính xác và an toàn là ba nguyên tắc chính trong vận hành cần cẩu</span></p>
+        </div>
+    </div>
+
+    <!-- 投影片4: 異常處理 -->
+    <div class="slide theme-emergency">
+        <div class="slide-counter">5/5</div>
+        <div class="logo">
+            <img src="https://github.com/Williyen/safelift/blob/main/%E5%A4%A7%E5%90%8Clogo_1.png?raw=true" alt="TTA Logo">
+        </div>
+        <h2>三、異常處理 <span class="translation" data-id="id">/ Penanganan jika terjadi kondisi tidak normal</span> <span class="translation" data-th="th">/ การจัดการเมื่อเกิดเหตุผิดปกติ</span> <span class="translation" data-vi="vi">/ Xử lý khi có tình huống bất thường</span></h2>
+
+        <div class="critical-point danger">
+            🚨 緊急情況立即停止作業
+            <div class="translation-block" data-id="id">Situasi darurat segera hentikan operasi</div>
+            <div class="translation-block" data-th="th">สถานการณ์ฉุกเฉินให้หยุดการทำงานทันที</div>
+            <div class="translation-block" data-vi="vi">Tình huống khẩn cấp phải dừng công việc ngay lập tức</div>
+        </div>
+
+        <div class="warning-box danger">
+            <h4>🚨 緊急停止情況 <span class="translation" data-id="id">/ Situasi Penghentian Darurat</span> <span class="translation" data-th="th">/ สถานการณ์ที่ต้องหยุดฉุกเฉิน</span> <span class="translation" data-vi="vi">/ Tình huống phải dừng khẩn cấp</span></h4>
+            <p>發生以下情況時，請立即停止作業：<span class="translation" data-id="id">/ Jika terjadi situasi berikut, segera hentikan operasi</span><span class="translation" data-th="th">/ หากเกิดสถานการณ์ต่อไปนี้ ให้หยุดการทำงานทันที</span><span class="translation" data-vi="vi">/ Khi xảy ra các tình huống sau, hãy dừng công việc ngay lập tức</span></p>
+        </div>
+
+        <h3>緊急處理三原則 <span class="translation" data-id="id">/ Tiga Prinsip Utama Penanganan Darurat</span> <span class="translation" data-th="th">/ หลักการสำคัญสามประการในการจัดการเหตุฉุกเฉิน</span> <span class="translation" data-vi="vi">/ Ba nguyên tắc chính xử lý khẩn cấp</span></h3>
+        <ul>
+            <li><strong>發現吊掛物下方人員通過請立即停止</strong> <span class="translation" data-id="id">/ Jika ada orang lewat di bawah beban yang sedang diangkat, segera hentikan operasi</span> <span class="translation" data-th="th">/ หากพบว่ามีคนเดินผ่านใต้วัตถุที่กำลังยกอยู่ให้หยุดการทำงานทันที</span> <span class="translation" data-vi="vi">/ Nếu phát hiện có người đi qua dưới vật đang được nâng, phải dừng lại ngay lập tức</span>
+                <div style="margin-left: 20px; color: #dc3545; font-weight: bold;">→ 人員安全優先 <span class="translation" data-id="id">/ Prioritas keselamatan personel</span> <span class="translation" data-th="th">/ ความปลอดภัยของบุคลากรเป็นอันดับแรก</span> <span class="translation" data-vi="vi">/ Ưu tiên an toàn con người</span></div>
+            </li>
+            <li><strong>吊掛物在吊掛過程中搖晃請立即停止</strong> <span class="translation" data-id="id">/ Jika beban bergoyang saat proses pengangkatan, segera hentikan operasi</span> <span class="translation" data-th="th">/ หากวัตถุที่กำลังยกเกิดการแกว่ง ให้หยุดการทำงานทันที</span> <span class="translation" data-vi="vi">/ Nếu vật nâng bị lắc trong quá trình nâng, phải dừng lại ngay</span>
+                <div style="margin-left: 20px; color: #dc3545; font-weight: bold;">→ 防止物件墜落 <span class="translation" data-id="id">/ Mencegah objek jatuh</span> <span class="translation" data-th="th">/ ป้องกันการตกหล่นของวัตถุ</span> <span class="translation" data-vi="vi">/ Ngăn ngừa vật rơi</span></div>
+            </li>
+            <li><strong>吊掛機具故障立即報告現場主管</strong> <span class="translation" data-id="id">/ Jika alat pengangkat mengalami kerusakan, segera laporkan kepada supervisor di lokasi</span> <span class="translation" data-th="th">/ หากเครื่องมือยกเกิดปัญหา ให้รายงานหัวหน้างานทันที</span> <span class="translation" data-vi="vi">/ Nếu thiết bị nâng gặp sự cố, phải báo cáo ngay cho quản lý tại hiện trường</span>
+                <div style="margin-left: 20px; color: #dc3545; font-weight: bold;">→ 專業處理問題 <span class="translation" data-id="id">/ Penanganan masalah secara profesional</span> <span class="translation" data-th="th">/ การจัดการปัญหาอย่างมืออาชีพ</span> <span class="translation" data-vi="vi">/ Xử lý vấn đề một cách chuyên nghiệp</span></div>
+            </li>
+        </ul>
+
+        <div class="info-box danger">
+            <h4>📞 記住：發現異常立即停止，第一時間通報主管 <span class="translation" data-id="id">/ Ingat: Jika menemukan kelainan segera hentikan, laporkan kepada supervisor sesegera mungkin</span> <span class="translation" data-th="th">/ จำไว้: หากพบความผิดปกติให้หยุดทันที รายงานหัวหน้างานในทันที</span> <span class="translation" data-vi="vi">/ Ghi nhớ: Phát hiện bất thường phải dừng ngay, báo cáo quản lý ngay lập tức</span></h4>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">◀ 上一頁</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">下一頁 ▶</button>
+    </div>
+</div>
+
+<script>
+    // 語言切換功能
+    let currentLanguage = 'zh';
+
+    function switchLanguage(lang) {
+        currentLanguage = lang;
+        
+        // 更新按鈕狀態
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(lang + '-btn').classList.add('active');
+        
+        // 隱藏所有翻譯
+        document.querySelectorAll('.translation').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.translation-block').forEach(el => el.classList.remove('active'));
+        
+        // 顯示對應語言的翻譯
+        if (lang !== 'zh') {
+            document.querySelectorAll('.translation[data-' + lang + ']').forEach(el => el.classList.add('active'));
+            document.querySelectorAll('.translation-block[data-' + lang + ']').forEach(el => el.classList.add('active'));
         }
+    }
 
-        // PDF 生成功能
-        function generatePDF() {
-            // 隱藏導航按鈕和語言切換按鈕
-            const navigation = document.querySelector('.navigation');
-            const langControls = document.querySelector('.translation-controls');
-            const pdfBtn = document.querySelector('.pdf-btn');
+    // PDF 生成功能
+    function generatePDF() {
+        // 隱藏導航按鈕和語言切換按鈕
+        const navigation = document.querySelector('.navigation');
+        const langControls = document.querySelector('.translation-controls');
+        const pdfBtn = document.querySelector('.pdf-btn');
+        
+        navigation.style.display = 'none';
+        langControls.style.display = 'none';
+        pdfBtn.style.display = 'none';
+        
+        // 顯示所有投影片
+        const slides = document.querySelectorAll('.slide');
+        slides.forEach((slide, index) => {
+            slide.style.display = 'block';
+            slide.style.pageBreakAfter = index < slides.length - 1 ? 'always' : 'auto';
+            slide.style.minHeight = '100vh';
+            slide.style.padding = '40px';
+        });
+        
+        // 調整為A4橫向列印模式
+        document.body.style.background = 'white';
+        document.querySelector('.presentation-container').style.boxShadow = 'none';
+        document.querySelector('.presentation-container').style.maxWidth = '100%';
+        document.querySelector('.presentation-container').style.width = '100%';
+        
+        // 根據當前語言決定是否隱藏中文
+        const hideChineseForNonChinese = currentLanguage !== 'zh';
+        
+        // 添加列印專用樣式
+        const printStyle = document.createElement('style');
+        printStyle.id = 'print-style';
+        printStyle.textContent = `
+            @media print {
+                @page {
+                    size: A4 landscape;
+                    margin: 15mm;
+                }
+                
+                body {
+                    margin: 0;
+                    padding: 0;
+                    background: white !important;
+                }
+                
+                .presentation-container {
+                    box-shadow: none !important;
+                    border-radius: 0 !important;
+                    max-width: 100% !important;
+                    width: 100% !important;
+                }
+                
+                .slide {
+                    width: 100% !important;
+                    height: 100vh !important;
+                    display: block !important;
+                    padding: 30px 40px !important;
+                    box-sizing: border-box;
+                }
+                
+                .slide h1 {
+                    font-size: 2.5rem !important;
+                    margin-bottom: 25px !important;
+                    line-height: 1.2 !important;
+                }
+                
+                .slide h2 {
+                    font-size: 2rem !important;
+                    margin-bottom: 20px !important;
+                    line-height: 1.3 !important;
+                }
+                
+                .slide h3 {
+                    font-size: 1.5rem !important;
+                    margin: 20px 0 15px 0 !important;
+                    line-height: 1.3 !important;
+                }
+                
+                .slide p, .slide li {
+                    font-size: 1.1rem !important;
+                    line-height: 1.5 !important;
+                    margin-bottom: 12px !important;
+                }
+                
+                .slide ul {
+                    margin-left: 25px !important;
+                }
+                
+                .slide li {
+                    margin-bottom: 10px !important;
+                    padding-left: 8px !important;
+                }
+                
+                .critical-point {
+                    font-size: 1.4rem !important;
+                    padding: 20px !important;
+                    margin: 20px 0 !important;
+                    line-height: 1.3 !important;
+                }
+                
+                .warning-box, .info-box {
+                    padding: 15px 20px !important;
+                    margin: 15px 0 !important;
+                    font-size: 1rem !important;
+                }
+                
+                .warning-box h4, .info-box h4 {
+                    font-size: 1.2rem !important;
+                    margin-bottom: 10px !important;
+                    line-height: 1.2 !important;
+                }
+                
+                .warning-box ul, .info-box ul {
+                    margin-left: 20px !important;
+                    margin-top: 10px !important;
+                }
+                
+                .warning-box li, .info-box li {
+                    font-size: 0.95rem !important;
+                    margin-bottom: 8px !important;
+                    line-height: 1.4 !important;
+                }
+                
+                .logo {
+                    width: 60px !important;
+                    height: 60px !important;
+                    top: 15px !important;
+                    right: 15px !important;
+                }
+                
+                .slide-counter {
+                    bottom: 15px !important;
+                    left: 15px !important;
+                    font-size: 0.8rem !important;
+                    padding: 4px 8px !important;
+                }
+                
+                .company-logo {
+                    width: 120px !important;
+                    height: 90px !important;
+                    margin: 20px auto !important;
+                }
+                
+                .title-slide h1 {
+                    font-size: 3rem !important;
+                    margin-bottom: 20px !important;
+                    line-height: 1.2 !important;
+                }
+                
+                .equipment-type {
+                    font-size: 1.2rem !important;
+                    margin-bottom: 15px !important;
+                    line-height: 1.3 !important;
+                }
+                
+                .subtitle {
+                    font-size: 1.2rem !important;
+                    margin-bottom: 30px !important;
+                    line-height: 1.3 !important;
+                }
+                
+                .translation-block {
+                    font-size: 1.1rem !important;
+                    line-height: 1.4 !important;
+                    margin-top: 10px !important;
+                }
+                
+                .critical-point .translation-block {
+                    font-size: 1.3rem !important;
+                    line-height: 1.3 !important;
+                }
+                
+                .title-slide .translation-block {
+                    font-size: 1.2rem !important;
+                    line-height: 1.3 !important;
+                }
+                
+                .highlight {
+                    font-size: 1rem !important;
+                    padding: 3px 6px !important;
+                }
+                
+                ${hideChineseForNonChinese ? `
+                .slide .translation,
+                .slide .translation-block {
+                    color: #495057 !important;
+                    font-style: normal !important;
+                }
+                
+                .slide .translation.active,
+                .slide .translation-block.active {
+                    color: #495057 !important;
+                    font-style: normal !important;
+                    display: inline !important;
+                }
+                
+                .slide .translation-block.active {
+                    display: block !important;
+                }
+                
+                .critical-point .translation-block.active {
+                    color: white !important;
+                }
+                ` : ''}
+            }
+        `;
+        document.head.appendChild(printStyle);
+        
+        // 執行列印
+        window.print();
+        
+        // 恢復原狀態
+        setTimeout(() => {
+            navigation.style.display = 'flex';
+            langControls.style.display = 'flex';
+            pdfBtn.style.display = 'flex';
             
-            navigation.style.display = 'none';
-            langControls.style.display = 'none';
-            pdfBtn.style.display = 'none';
+            // 移除列印樣式
+            const printStyleElement = document.getElementById('print-style');
+            if (printStyleElement) {
+                printStyleElement.remove();
+            }
             
-            // 顯示所有投影片
-            const slides = document.querySelectorAll('.slide');
             slides.forEach((slide, index) => {
-                slide.style.display = 'block';
-                slide.style.pageBreakAfter = index < slides.length - 1 ? 'always' : 'auto';
-                slide.style.minHeight = '100vh';
-                slide.style.padding = '40px';
+                slide.style.display = index === currentSlide ? 'block' : 'none';
+                slide.style.pageBreakAfter = 'auto';
+                slide.style.minHeight = '600px';
+                slide.style.padding = index === 0 ? '40px 60px' : '30px 60px 80px';
             });
             
-            // 調整為A4橫向列印模式
-            document.body.style.background = 'white';
-            document.querySelector('.presentation-container').style.boxShadow = 'none';
-            document.querySelector('.presentation-container').style.maxWidth = '100%';
+            document.body.style.background = 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)';
+            document.querySelector('.presentation-container').style.boxShadow = '0 30px 60px rgba(0, 0, 0, 0.2)';
+            document.querySelector('.presentation-container').style.maxWidth = '1200px';
             document.querySelector('.presentation-container').style.width = '100%';
-            
-            // 添加列印專用樣式
-            const printStyle = document.createElement('style');
-            printStyle.id = 'print-style';
-            printStyle.textContent = `
-                @media print {
-                    @page {
-                        size: A4 landscape;
-                        margin: 15mm;
-                    }
-                    
-                    body {
-                        margin: 0;
-                        padding: 0;
-                        background: white !important;
-                    }
-                    
-                    .presentation-container {
-                        box-shadow: none !important;
-                        border-radius: 0 !important;
-                        max-width: 100% !important;
-                        width: 100% !important;
-                    }
-                    
-                    .slide {
-                        width: 100% !important;
-                        height: 100vh !important;
-                        display: block !important;
-                        padding: 30px 40px !important;
-                        box-sizing: border-box;
-                    }
-                    
-                    .slide h1 {
-                        font-size: 2.5rem !important;
-                        margin-bottom: 25px !important;
-                    }
-                    
-                    .slide h2 {
-                        font-size: 2rem !important;
-                        margin-bottom: 20px !important;
-                    }
-                    
-                    .slide h3 {
-                        font-size: 1.5rem !important;
-                        margin: 20px 0 15px 0 !important;
-                    }
-                    
-                    .slide p, .slide li {
-                        font-size: 1.1rem !important;
-                        line-height: 1.6 !important;
-                        margin-bottom: 10px !important;
-                    }
-                    
-                    .critical-point {
-                        font-size: 1.4rem !important;
-                        padding: 20px !important;
-                        margin: 20px 0 !important;
-                    }
-                    
-                    .warning-box, .info-box {
-                        padding: 15px !important;
-                        margin: 15px 0 !important;
-                        font-size: 1rem !important;
-                    }
-                    
-                    .warning-box h4, .info-box h4 {
-                        font-size: 1.2rem !important;
-                    }
-                    
-                    .logo {
-                        width: 60px !important;
-                        height: 60px !important;
-                        top: 15px !important;
-                        right: 15px !important;
-                    }
-                    
-                    .slide-counter {
-                        bottom: 15px !important;
-                        left: 15px !important;
-                        font-size: 0.8rem !important;
-                        padding: 4px 8px !important;
-                    }
-                    
-                    .company-logo {
-                        width: 120px !important;
-                        height: 90px !important;
-                        margin: 20px auto !important;
-                    }
-                    
-                    .title-slide h1 {
-                        font-size: 3rem !important;
-                        margin-bottom: 20px !important;
-                    }
-                    
-                    .equipment-type {
-                        font-size: 1.2rem !important;
-                        margin-bottom: 15px !important;
-                    }
-                    
-                    .subtitle {
-                        font-size: 1.2rem !important;
-                        margin-bottom: 30px !important;
-                    }
-                }
-            `;
-            document.head.appendChild(printStyle);
-            
-            // 執行列印
-            window.print();
-            
-            // 恢復原狀態
-            setTimeout(() => {
-                navigation.style.display = 'flex';
-                langControls.style.display = 'flex';
-                pdfBtn.style.display = 'flex';
-                
-                // 移除列印樣式
-                const printStyleElement = document.getElementById('print-style');
-                if (printStyleElement) {
-                    printStyleElement.remove();
-                }
-                
-                slides.forEach((slide, index) => {
-                    slide.style.display = index === currentSlide ? 'block' : 'none';
-                    slide.style.pageBreakAfter = 'auto';
-                    slide.style.minHeight = '600px';
-                    slide.style.padding = index === 0 ? '40px 60px' : '30px 60px 80px';
-                });
-                
-                document.body.style.background = 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)';
-                document.querySelector('.presentation-container').style.boxShadow = '0 30px 60px rgba(0, 0, 0, 0.2)';
-                document.querySelector('.presentation-container').style.maxWidth = '1200px';
-                document.querySelector('.presentation-container').style.width = '100%';
-            }, 1000);
-        }
+        }, 1000);
+    }
 
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
 
-        function showSlide(n) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            slides[n].classList.add('active');
-            
-            // 更新進度條
-            const progress = ((n + 1) / totalSlides) * 100;
-            document.getElementById('progressBar').style.width = progress + '%';
-            
-            // 更新按鈕狀態
-            document.getElementById('prevBtn').disabled = n === 0;
-            document.getElementById('nextBtn').disabled = n === totalSlides - 1;
-        }
+    function showSlide(n) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[n].classList.add('active');
+        
+        // 更新進度條
+        const progress = ((n + 1) / totalSlides) * 100;
+        document.getElementById('progressBar').style.width = progress + '%';
+        
+        // 更新按鈕狀態
+        document.getElementById('prevBtn').disabled = n === 0;
+        document.getElementById('nextBtn').disabled = n === totalSlides - 1;
+    }
 
-        function changeSlide(direction) {
-            currentSlide += direction;
-            if (currentSlide < 0) currentSlide = 0;
-            if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
-            showSlide(currentSlide);
-        }
+    function changeSlide(direction) {
+        currentSlide += direction;
+        if (currentSlide < 0) currentSlide = 0;
+        if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+        showSlide(currentSlide);
+    }
 
-        // 鍵盤控制
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowLeft') changeSlide(-1);
-            if (e.key === 'ArrowRight') changeSlide(1);
-        });
+    // 鍵盤控制
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') changeSlide(-1);
+        if (e.key === 'ArrowRight') changeSlide(1);
+    });
 
-        // 初始化
-        showSlide(0);
-    </script>
+    // 初始化
+    showSlide(0);
+</script>
+```
+
 </body>
 </html>
-            
