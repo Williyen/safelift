@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -491,7 +492,6 @@
             backdrop-filter: blur(5px);
         }
         
-        
         .lang-btn {
             padding: 6px 12px;
             background: white;
@@ -518,7 +518,7 @@
         .pdf-btn {
             position: fixed;
             bottom: 20px;
-            left: 100px;
+            left: 20px;
             width: 45px;
             height: 45px;
             background: #dc3545;
@@ -582,24 +582,78 @@
 
         @media (max-width: 768px) {
             .slide {
-                padding: 30px;
+                padding: 20px;
             }
             
             .slide h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
             
             .slide h2 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             .slide h3 {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
             }
             
             .slide p, .slide li {
                 font-size: 1.1rem;
-            }        
+            }
+            
+            .navigation {
+                bottom: 15px;
+                right: 15px;
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .translation-controls {
+                left: 10px;
+                bottom: 70px;
+                padding: 10px 6px;
+            }
+            
+            .lang-btn {
+                padding: 6px 10px;
+                font-size: 0.7rem;
+                min-width: 55px;
+            }
+            
+            .pdf-btn {
+                bottom: 10px;
+                left: 85px;
+                width: 40px;
+                height: 40px;
+                font-size: 14px;
+            }
+            
+            .logo {
+                width: 60px;
+                height: 60px;
+                top: 10px;
+                right: 10px;
+            }
+            
+            .slide-counter {
+                bottom: 10px;
+                left: 10px;
+                padding: 4px 8px;
+                font-size: 0.8rem;
+            }
+            
+            .title-slide h1 {
+                font-size: 2.5rem;
+            }
+            
+            .critical-point {
+                font-size: 1.4rem;
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -612,6 +666,8 @@
     </div>
 
     <div class="progress-bar" id="progressBar"></div>
+    
+    <button class="pdf-btn" onclick="generatePDF()" title="匯出 PDF">📄</button>
     
     <div class="presentation-container">
         <!-- 封面投影片 -->
