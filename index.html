@@ -797,6 +797,53 @@
             }
         }
 
+        // PDF 生成功能
+        function generatePDF() {
+            // 隱藏導航按鈕和語言切換按鈕
+            const navigation = document.querySelector('.navigation');
+            const langControls = document.querySelector('.translation-controls');
+            const pdfBtn = document.querySelector('.pdf-btn');
+            
+            navigation.style.display = 'none';
+            langControls.style.display = 'none';
+            pdfBtn.style.display = 'none';
+            
+            // 顯示所有投影片
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((slide, index) => {
+                slide.style.display = 'block';
+                slide.style.pageBreakAfter = index < slides.length - 1 ? 'always' : 'auto';
+                slide.style.minHeight = '100vh';
+                slide.style.padding = '40px';
+            });
+            
+            // 調整為列印模式
+            document.body.style.background = 'white';
+            document.querySelector('.presentation-container').style.boxShadow = 'none';
+            document.querySelector('.presentation-container').style.maxWidth = '100%';
+            
+            // 執行列印
+            window.print();
+            
+            // 恢復原狀態
+            setTimeout(() => {
+                navigation.style.display = 'flex';
+                langControls.style.display = 'flex';
+                pdfBtn.style.display = 'flex';
+                
+                slides.forEach((slide, index) => {
+                    slide.style.display = index === currentSlide ? 'block' : 'none';
+                    slide.style.pageBreakAfter = 'auto';
+                    slide.style.minHeight = '600px';
+                    slide.style.padding = index === 0 ? '40px 60px' : '30px 60px 80px';
+                });
+                
+                document.body.style.background = 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)';
+                document.querySelector('.presentation-container').style.boxShadow = '0 30px 60px rgba(0, 0, 0, 0.2)';
+                document.querySelector('.presentation-container').style.maxWidth = '1200px';
+            }, 1000);
+        }
+
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
