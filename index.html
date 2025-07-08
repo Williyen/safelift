@@ -1140,33 +1140,26 @@
         // 執行列印
         window.print();
         
-        // 恢復原狀態
+        // 監聽列印對話框關閉事件
+        const afterPrint = () => {
+            // 延遲一點時間確保列印對話框完全關閉
+            setTimeout(() => {
+                // 重新整理頁面
+                window.location.reload();
+            }, 500);
+        };
+        
+        // 監聽列印事件
+        window.addEventListener('afterprint', afterPrint, { once: true });
+        
+        // 備用方案：如果afterprint事件不被支援，使用延時重新整理
         setTimeout(() => {
-            navigation.style.display = 'flex';
-            langControls.style.display = 'flex';
-            pdfBtn.style.display = 'flex';
-            
-            // 移除中文隱藏類別
-            document.body.classList.remove('hide-chinese');
-            
-            // 移除列印樣式
-            const printStyleElement = document.getElementById('print-style');
-            if (printStyleElement) {
-                printStyleElement.remove();
+            window.removeEventListener('afterprint', afterPrint);
+            // 檢查頁面是否還在列印狀態，如果不是就重新整理
+            if (document.readyState === 'complete') {
+                window.location.reload();
             }
-            
-            slides.forEach((slide, index) => {
-                slide.style.display = index === currentSlide ? 'block' : 'none';
-                slide.style.pageBreakAfter = 'auto';
-                slide.style.minHeight = '600px';
-                slide.style.padding = index === 0 ? '40px 60px' : '30px 60px 80px';
-            });
-            
-            document.body.style.background = 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)';
-            document.querySelector('.presentation-container').style.boxShadow = '0 30px 60px rgba(0, 0, 0, 0.2)';
-            document.querySelector('.presentation-container').style.maxWidth = '1200px';
-            document.querySelector('.presentation-container').style.width = '100%';
-        }, 1000);
+        }, 10000); // 10秒後強制重新整理
     }
 
     let currentSlide = 0;
