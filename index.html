@@ -1141,12 +1141,16 @@
         window.print();
         
         // 監聽列印對話框關閉事件
+        let hasReloaded = false;
+        
         const afterPrint = () => {
-            // 延遲一點時間確保列印對話框完全關閉
-            setTimeout(() => {
-                // 重新整理頁面
-                window.location.reload();
-            }, 500);
+            if (!hasReloaded) {
+                hasReloaded = true;
+                // 延遲一點時間確保列印對話框完全關閉
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
+            }
         };
         
         // 監聽列印事件
@@ -1154,9 +1158,9 @@
         
         // 備用方案：如果afterprint事件不被支援，使用延時重新整理
         setTimeout(() => {
-            window.removeEventListener('afterprint', afterPrint);
-            // 檢查頁面是否還在列印狀態，如果不是就重新整理
-            if (document.readyState === 'complete') {
+            if (!hasReloaded) {
+                hasReloaded = true;
+                window.removeEventListener('afterprint', afterPrint);
                 window.location.reload();
             }
         }, 10000); // 10秒後強制重新整理
