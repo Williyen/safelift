@@ -1137,33 +1137,13 @@
         `;
         document.head.appendChild(printStyle);
         
-        // 執行列印
+        // 執行列印（同步阻塞，會等待對話框關閉）
         window.print();
         
-        // 監聽列印對話框關閉事件
-        let hasReloaded = false;
-        
-        const afterPrint = () => {
-            if (!hasReloaded) {
-                hasReloaded = true;
-                // 延遲一點時間確保列印對話框完全關閉
-                setTimeout(() => {
-                    window.location.reload();
-                }, 500);
-            }
-        };
-        
-        // 監聽列印事件
-        window.addEventListener('afterprint', afterPrint, { once: true });
-        
-        // 備用方案：如果afterprint事件不被支援，使用延時重新整理
+        // 對話框關閉後，延遲0.5秒重新整理
         setTimeout(() => {
-            if (!hasReloaded) {
-                hasReloaded = true;
-                window.removeEventListener('afterprint', afterPrint);
-                window.location.reload();
-            }
-        }, 5000); // 5秒後強制重新整理
+            window.location.reload();
+        }, 500);
     }
 
     let currentSlide = 0;
