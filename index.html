@@ -701,7 +701,7 @@
             <img src="https://github.com/Williyen/safelift/blob/main/%E5%A4%A7%E5%90%8Clogo_1.png?raw=true" alt="大同鋁業 TTA Logo">
         </div>
         <div class="equipment-type"><span class="chinese-content">固定式起重機</span> <span class="translation" data-id="id">Crane Tetap</span> <span class="translation" data-th="th">เครนแบบคงที่</span> <span class="translation" data-vi="vi">Cần cẩu cố định</span></div>
-        <h1 class="text-with-translation"><span class="chinese-content">吊掛作業安全說明</span>
+        <h1 class="text-with-translation"><span class="chinese-content keep-title">吊掛作業安全說明</span>
             <div class="translation-block" data-id="id">Keamanan dalam pekerjaan pengangkatan</div>
             <div class="translation-block" data-th="th">คำแนะนำความปลอดภัยสำหรับการยกของ</div>
             <div class="translation-block" data-vi="vi">Hướng dẫn an toàn cho công việc nâng hạ</div>
@@ -880,6 +880,25 @@
 
     // PDF 生成功能
     function generatePDF() {
+        // 嘗試啟用背景圖形列印
+        try {
+            // Chrome/Edge
+            if (window.chrome && window.chrome.runtime) {
+                document.documentElement.style.setProperty('-webkit-print-color-adjust', 'exact');
+                document.documentElement.style.setProperty('color-adjust', 'exact');
+            }
+            // Firefox
+            else if (typeof InstallTrigger !== 'undefined') {
+                document.documentElement.style.setProperty('color-adjust', 'exact');
+            }
+            // Safari
+            else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification))) {
+                document.documentElement.style.setProperty('-webkit-print-color-adjust', 'exact');
+            }
+        } catch (e) {
+            console.log('無法自動設定背景列印，請手動在列印設定中勾選「背景圖形」');
+        }
+        
         // 隱藏導航按鈕和語言切換按鈕
         const navigation = document.querySelector('.navigation');
         const langControls = document.querySelector('.translation-controls');
@@ -916,6 +935,13 @@
         const printStyle = document.createElement('style');
         printStyle.id = 'print-style';
         printStyle.textContent = `
+            /* 強制列印背景和顏色 */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
             @media print {
                 @page {
                     size: A4 landscape;
@@ -926,6 +952,8 @@
                     margin: 0;
                     padding: 0;
                     background: white !important;
+                    -webkit-print-color-adjust: exact !important;
+                    color-adjust: exact !important;
                 }
                 
                 .presentation-container {
@@ -1068,6 +1096,11 @@
                 /* 隱藏中文內容的樣式 */
                 .hide-chinese .chinese-content {
                     display: none !important;
+                }
+                
+                /* 保持主標題顯示 */
+                .hide-chinese .chinese-content.keep-title {
+                    display: inline !important;
                 }
                 
                 /* 當隱藏中文時，讓翻譯內容更突出 */
